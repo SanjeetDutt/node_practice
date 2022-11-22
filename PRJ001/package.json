@@ -1,0 +1,18 @@
+{
+  "name": "prj001",
+  "version": "1.0.0",
+  "description": "This is practice project",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm i",
+    "start": "nodemon app.js"
+  },
+  "author": "Sanjeet Dutt",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
