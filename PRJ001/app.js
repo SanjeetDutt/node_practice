@@ -3,24 +3,22 @@ const express = require("express")
 const bodyParser = require("body-parser")
 
 // Custom imports
-const path = require("./util/path")
-const publicRoute = require("./routes/public")
-const adminRoute = require("./routes/admin")
+const path = require("./src/util/path")
+const myRouter = require("./src/routes/main")
 
 // Creating new application
 const app = express()
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.static(path.join("public")))
+app.use(express.json())
 
-//adding public route
-app.use("/",publicRoute);
-
-// adding admin route
-app.use("/admin", adminRoute)
+myRouter(app)
 
 
 // Default 404 page
-app.use((req,res,next)=>{
-    res.sendFile(path.join("view","404.html"))
+app.use((req,res)=>{
+    res.status( 404)
+    res.end("Page not found")
 })
 
 // Starting Application
