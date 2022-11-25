@@ -1,10 +1,14 @@
-const product =  class Products{
-    constructor(id, name, price, quantity) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity
-        this.id = id
-    }
-}
+const { DataTypes } = require("sequelize")
+const sequelize = require("../util/database")
 
-module.exports = product
+const product = sequelize.define("products",{
+    id:{
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        notNull: true,
+        primaryKey: true
+    },
+    name: DataTypes.STRING,
+    price: DataTypes.DOUBLE,
+    stock: DataTypes.INTEGER,
+})

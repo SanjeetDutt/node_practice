@@ -25,7 +25,7 @@ app.use((req,res)=>{
 
 // Starting Application
 
-sequelize.sync().then(()=>{
+sequelize.sync({alter: true}).then(()=>{
     console.log("server started on port 3000")
     app.listen(3000)
 }).catch(err=>{
