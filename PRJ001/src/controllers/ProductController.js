@@ -1,54 +1,49 @@
 const Product = require("../models/Products")
+const {noRawAttributes} = require("sequelize/lib/utils/deprecations");
 
-const products = {};
-
-const newId = ()=>{
-    return Object.keys(products).length + 1
+module.exports.addProduct = (name, price, stock) => {
+    return Product.create({
+        name, price, stock
+    })
 }
 
-const addProduct = (name, price, stock)=>{
-    const product = new Product(newId(), name, price, stock)
-    products[product.id] = product
-    return product
-}
+module.exports.updateProduct = async (id, name, price, stock)=>{
+    console.log("UPDATING PRODUCT with ID " + id)
+    const product = await getProduct(id)
 
-const updateProduct = (id, name, price, quantity)=>{
-    const product = getProduct(id)
+    console.log("product is " + product.getDataValue("name"))
 
-    if(product === null)
-        return null
-
-    product.name = name
-    product.price = price
-    product.quantity = quantity
-
-    return product
-}
-
-const deleteProduct = (id)=>{
-    const product = getProduct(id)
-
-    if(product === null)
+    if(product.getDataValue("name") === null)
         return false
 
-    delete products[id]
-    return true
+    return Product.update({
+        name, price, stock
+    },{
+        where:{
+            id
+        }
+    })
+
 }
 
-const getProduct = (id)=>{
-    if(products[id])
-        return products[id]
-    return null
+module.exports.deleteProduct = async (id) => {
+    const product = await getProduct(id)
+
+    if (product === null)
+        return false
+
+    return Product.destroy({
+        where:{
+            id
+        }
+    })
+
 }
 
-const getAllProducts = ()=>{
-    return products
+const getProduct = module.exports.getProduct = (id) => {
+    return Product.findByPk(id)
 }
 
-module.exports = {
-    addProduct,
-    updateProduct,
-    deleteProduct,
-    getProduct,
-    getAllProducts,
+module.exports.getAllProducts = () => {
+    return Product.findAll()
 }
