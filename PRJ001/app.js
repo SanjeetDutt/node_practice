@@ -6,6 +6,7 @@ const bodyParser = require("body-parser")
 const path = require("./src/util/path")
 const myRouter = require("./src/routes/main")
 const sequelize = require("./src/util/database")
+const databaseDefault = require("./src/util/databaseDefaults")
 
 // Creating new application
 const app = express()
@@ -23,11 +24,15 @@ app.use((req,res)=>{
     res.end("Page not found")
 })
 
-// Starting Application
+// Adding relation mapping
+require("./src/associations/main")
 
-sequelize.sync({alter: true}).then(()=>{
-    console.log("server started on port 3000")
-    app.listen(3000)
-}).catch(err=>{
-    console.error("Error while starting the application " , err)
-})
+// Starting Application
+sequelize.sync({alter: true})
+    .then(()=>{
+        databaseDefault
+            .then(()=>{
+                console.log("server started on port 3000")
+                app.listen(3000)
+            })
+    })

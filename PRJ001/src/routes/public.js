@@ -13,10 +13,10 @@ route.get("/product",async (req, res, next) => {
             .map(result=>{
                 console.log(result)
                 return {
-                    id: result.getDataValue("id"),
-                    name: result.getDataValue("name"),
-                    price: result.getDataValue("price"),
-                    stock: result.getDataValue("stock")
+                    id: result.id,
+                    name: result.name,
+                    price: result.price,
+                    stock: result.stock
                 }
             })
     )

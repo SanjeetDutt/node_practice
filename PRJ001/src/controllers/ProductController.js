@@ -1,5 +1,4 @@
 const Product = require("../models/Products")
-const {noRawAttributes} = require("sequelize/lib/utils/deprecations");
 
 module.exports.addProduct = (name, price, stock) => {
     return Product.create({
