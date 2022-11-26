@@ -1,4 +1,5 @@
 const User = require("../models/Users")
+const UserRole = require("../models/UserRoles")
 const userRoleController = require("./UserRoleController")
 
 
@@ -19,5 +20,14 @@ module.exports.addUser = async (name, email, roleName) => {
 }
 
 module.exports.getAll = () =>{
-    return User.findAll();
+    return User.findAll({
+        include:[
+            {
+                model: UserRole,
+                // where:{
+                //     name:"admin"
+                // }
+            }
+        ]
+    });
 }

@@ -23,7 +23,7 @@ router.get("/get-all",async (req, res, next) => {
             id:e.id,
             name: e.name,
             email: e.email,
-            role:""
+            role: e["user-role"].name
         }
     }))
 })
