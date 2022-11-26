@@ -31,11 +31,7 @@ module.exports.deleteProduct = async (id) => {
     if (product === null)
         return false
 
-    return Product.destroy({
-        where:{
-            id
-        }
-    })
+    return product.destroy();
 
 }
 

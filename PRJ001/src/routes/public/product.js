@@ -1,12 +1,8 @@
-// Global Import
 const express = require("express")
+const productController = require("../../controllers/ProductController");
+const router = express.Router();
 
-// Local Import
-const productController = require("../controllers/ProductController")
-
-const route = express.Router();
-
-route.get("/product",async (req, res, next) => {
+router.get("/",async (req, res, next) => {
     console.log("GETTING ALL PRODUCTS")
     return res.send(
         (await productController.getAllProducts())
@@ -22,10 +18,10 @@ route.get("/product",async (req, res, next) => {
     )
 })
 
-route.get("/product/:productId",async (req, res, next) => {
+router.get("/:productId",async (req, res, next) => {
     console.log("GETTING PRODUCT BY " + req.params.productId)
     const product = await productController.getProduct(req.params.productId)
     return res.send(product)
 })
 
-module.exports = route
+module.exports = router

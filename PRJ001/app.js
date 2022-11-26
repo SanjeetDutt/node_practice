@@ -4,7 +4,7 @@ const bodyParser = require("body-parser")
 
 // Custom imports
 const path = require("./src/util/path")
-const myRouter = require("./src/routes/main")
+const myRouters = require("./src/routes/_main")
 const sequelize = require("./src/util/database")
 const databaseDefault = require("./src/util/databaseDefaults")
 
@@ -15,7 +15,7 @@ app.use(express.static(path.join("public")))
 app.use(express.json())
 
 // adding router to the application
-myRouter(app)
+app.use("/",myRouters)
 
 
 // Default 404 page

@@ -1,5 +1,7 @@
 const User = require("../models/Users")
 const userRoleController = require("./UserRoleController")
+
+
 module.exports.addUser = async (name, email, roleName) => {
 
     const userRole = await userRoleController.getUserRole(roleName)
@@ -14,4 +16,8 @@ module.exports.addUser = async (name, email, roleName) => {
         console.log(result)
     })
 
+}
+
+module.exports.getAll = () =>{
+    return User.findAll();
 }
