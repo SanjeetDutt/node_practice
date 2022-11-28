@@ -1,5 +1,7 @@
 const userRoles = require("../models/UserRoles")
 const users = require("../models/Users")
+const cart = require("../models/Cart")
+const product = require("../models/Products")
 
 
 //:::: USER-ROLES AND USERS MAPPING (ONE-MANY MAPPING)
@@ -9,3 +11,5 @@ userRoles.hasMany(users)    // A "HAS MANY" B means foreign key will be defined 
 
 
 //:::: USERS-PRODUCT (CART) (MANY TO MANY MAPPING)
+users.belongsToMany(product,{through: cart})
+product.belongsToMany(users,{through: cart})

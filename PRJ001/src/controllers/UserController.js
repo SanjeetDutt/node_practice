@@ -1,5 +1,7 @@
 const User = require("../models/Users")
 const UserRole = require("../models/UserRoles")
+const Cart = require("../models/Cart")
+const Product = require("../models/Products")
 const userRoleController = require("./UserRoleController")
 
 
@@ -24,10 +26,16 @@ module.exports.getAll = () =>{
         include:[
             {
                 model: UserRole,
-                // where:{
-                //     name:"admin"
-                // }
+                // where:{name:"admin"}
             }
         ]
     });
+}
+
+exports.getUserById = (id)=>{
+    return User.findByPk(id,{
+        include:[
+            {model: Product,through: Cart}
+        ]
+    })
 }

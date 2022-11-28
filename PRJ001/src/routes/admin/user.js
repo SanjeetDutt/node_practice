@@ -28,4 +28,22 @@ router.get("/get-all",async (req, res, next) => {
     }))
 })
 
+router.get("/get/:userId", async (req, res, next) => {
+    const user = await userController.getUserById(req.params.userId)
+    console.log(user)
+    return res.send({
+        name:user.name,
+        email:user.email,
+        id:user.id,
+        cartItems: user.products.map(product=>{
+            return {
+                name:product.name,
+                id:product.id,
+                price:product.price,
+                quantity:product.cart.quantity
+            }
+        })
+    })
+})
+
 module.exports = router
