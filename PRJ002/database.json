@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "postgres",
+    "password": "postgres",
+    "host": "localhost",
+    "database": "portfolio",
+    "port": "5432"
+  },
+  "test": {
+    "driver": "pg",
+    "user": "postgres",
+    "password": "postgres",
+    "host": "localhost",
+    "database": "portfolio",
+    "port": "5432"
+  },
+  "prod": {
+    "driver": "pg",
+    "user": "postgres",
+    "password": "postgres",
+    "host": "localhost",
+    "database": "portfolio",
+    "port": "5432"
+  }
+}
