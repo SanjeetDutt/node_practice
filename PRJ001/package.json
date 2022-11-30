@@ -1,0 +1,22 @@
+{
+  "name": "prj001",
+  "version": "1.0.0",
+  "description": "This is practice project",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm i",
+    "start": "nodemon app.js"
+  },
+  "author": "Sanjeet Dutt",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.25.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
