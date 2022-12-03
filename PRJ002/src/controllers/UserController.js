@@ -163,8 +163,11 @@ module.exports.login = async (request, response, next) => {
             await validatePassword(request.body.password)
         )
 
+        const loginCredentials = await UserService.getLoginCredentials(user)
+
         return response.send({
-            success: true
+            success: true,
+            credential: loginCredentials
         })
 
     } catch (error) {

@@ -1,6 +1,7 @@
 const User = require("../models/User")
 const UserRole = require("../models/UserRole")
-const encrypt = require("../utilities/excrypt")
+const LoginCredential = require("../models/LoginCredentials")
+const encrypt = require("../utilities/encrypt")
 const {ValidationError} = require("../utilities/Errors");
 
 module.exports.getUserRole = (role) => {
@@ -15,7 +16,7 @@ module.exports.getUserRole = (role) => {
 module.exports.addUser = (firstName, lastName, email, password, userRole) => {
     return userRole.createUser({
         firstName, lastName, email,
-        password: password,
+        password: encrypt.encrypt(password),
     })
 }
 
@@ -45,7 +46,8 @@ module.exports.updateUser = (user, firstName, lastName, password)=>{
     console.log("updating user ")
     console.log(user)
     return User.update({
-        firstName, lastName, password
+        firstName, lastName,
+        password: encrypt.encrypt(password)
     },{
         where:{
             id: user.id
@@ -66,14 +68,42 @@ module.exports.deleteUser = (user)=>{
 
 module.exports.login = async (email, password) => {
     const user = await User.findAll({
+        include:{
+            model: LoginCredential
+        },
         where: {
-            email, password
+            email,
+            password: encrypt.encrypt(password)
         }
     })
 
     if (!user || user.length < 1)
         throw new ValidationError("Invalid user credential")
 
-    return user
+    return user[0]
+}
+
+module.exports.getLoginCredentials = async (user) => {
+
+    const previousLogin = await user.getLoginCredentials()
+
+    if(!previousLogin || previousLogin.length < 1)
+        return createNewLoginCredential(user)
+
+    return previousLogin[0].hash
+
+}
+
+const createNewLoginCredential = async (user) => {
+    const date = new Date()
+    const hash = encrypt.encrypt(
+        user.id.toString() +
+        date.toISOString() +
+        Math.random().toString().substring(3)
+    )
+
+    await user.createLoginCredential({hash})
+
+    return hash
 }
 

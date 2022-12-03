@@ -29,4 +29,5 @@ create unique index user_unique_email
     on "users" (email);
 
 insert into public."users" (first_name, last_name, email, password,user_role_name)
-values ('Sanjeet', 'Dutt', 'sanjeetdutt@gmail.com', '','SUPER_ADMIN')
+values ('Sanjeet', 'Dutt', 'sanjeetdutt@gmail.com', '8cd2321c33b73642fa434452e3b7f1e3','SUPER_ADMIN')
+-- password : 08061995
