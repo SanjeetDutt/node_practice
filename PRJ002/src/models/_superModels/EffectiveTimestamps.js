@@ -1,7 +1,5 @@
 const { Sequelize } = require("sequelize")
-const Timestamp = require("./Timestamp")
 module.exports = {
-    ...Timestamp,
     effectiveDate:{
         field:"effective_date",
         type:"DATE",
