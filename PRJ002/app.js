@@ -1,7 +1,6 @@
 const Express = require("express")
 const BodyParser = require("body-parser")
 
-const sequelize = require("./src/utilities/sequelize")
 const router = require("./src/routers/_main")
 const {errorHandler} = require("./src/utilities/Errors")
 
