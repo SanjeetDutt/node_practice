@@ -17,8 +17,10 @@ module.exports.validateEmail = async (email) => {
     if (!emailId.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))
         throw new ValidationError("Please provide a valid email id")
 
-    if (await UserService.findUserByEmail(emailId)){
-        throw new ValidationError("Email already exist. Please try to login")
+    const userByEmail = await UserService.findUserByEmail(emailId)
+
+    if (userByEmail){
+        throw new ValidationError("Email already exist. Please try to edit it")
     }
 
         return emailId

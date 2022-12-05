@@ -16,15 +16,15 @@ Router.post("/add-admin", authorization.isSuperAdmin, userController.addAdmin)
 Router.get("/", authorization.isAdmin, userController.getAll)
 
 // get user by id => admin and super admin
-Router.get("/:id", authorization.isAdmin, userController.getByUserId)
+Router.get("/:userId", authorization.isAdmin, userController.getByUserId)
 
 // :::: UPDATE ::::
 // update user => only super admin has rights
-Router.put("/update/:id", authorization.isSuperAdmin, userController.updateUser)
+Router.put("/update/:userId", authorization.isAdminOrSelf, userController.updateUser)
 
 // :::: DELETE ::::
 // delete user => only super admin has rights
-Router.delete("/delete/:id", authorization.isSuperAdmin, userController.deleteUser)
+Router.delete("/delete/:userId", authorization.isSuperAdmin, userController.deleteUser)
 
 // :::: MISC ::::
 // get users by role =>  admin and super admin

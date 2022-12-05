@@ -19,7 +19,7 @@ const addUser = async (fname, lname, email, password, role)=>{
 }
 
 const getUserById = async (request)=>{
-    const id = request.params.id
+    const id = request.params.userId
 
     if(!id)
         throw new ValidationError("Invalid user id")
